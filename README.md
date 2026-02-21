@@ -1,10 +1,20 @@
 # Titanic Data Analysis
 
-This project analyzes the Titanic dataset to explore the factors affecting survival rates.
+This project explores the Titanic dataset, analyzing passenger survival and various factors that may have influenced their fate.
+
+## Overview
+
+The Titanic dataset contains information about the passengers, including their demographics, ticket information, and whether they survived.
 
 ## Images
 
-Here are some visualizations from the analysis:
+![Titanic Pic 1](path/to/titanic%20pic%201.png)
+![Titanic Pic 2](path/to/titanc%20pic%202.png)
+![Titanic Pic 3](path/to/titanic%20pic%203.png)
+![Titanic Pic 4](path/to/titanic%20pic%204.png)
+![Titanic Pic 5](path/to/titanic%20pic%205.png)
+![Titanic Pic 6](path/to/titanic%20pic%206.png)
 
-![Survival Rates](https://example.com/images/survival%20rates.png)
-![Fare Distribution](https://example.com/images/fare%20distribution.png)
+## Analysis
+
+In this section, we delve into the insights gathered from the dataset.
