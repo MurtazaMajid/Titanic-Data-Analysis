@@ -1,20 +1,42 @@
 # Titanic Data Analysis
 
-This project explores the Titanic dataset, analyzing passenger survival and various factors that may have influenced their fate.
+This repository contains my analysis of the Titanic dataset. The dataset contains data about the passengers, including their demographics, ticket information, and whether or not they survived the disaster.
 
-## Overview
+## Introduction
+The Titanic was a British passenger liner that sank in the North Atlantic Ocean after hitting an iceberg during its maiden voyage from Southampton to New York City.
 
-The Titanic dataset contains information about the passengers, including their demographics, ticket information, and whether they survived.
+## Dataset
+The dataset is available on Kaggle and includes the following columns:
+- PassengerId
+- Survived
+- Pclass
+- Name
+- Sex
+- Age
+- SibSp
+- Parch
+- Ticket
+- Fare
+- Cabin
+- Embarked
 
-## Images
+### Key Visualizations
+The following images illustrate key findings from the dataset:
 
-![Titanic Pic 1](path/to/titanic%20pic%201.png)
-![Titanic Pic 2](path/to/titanc%20pic%202.png)
-![Titanic Pic 3](path/to/titanic%20pic%203.png)
-![Titanic Pic 4](path/to/titanic%20pic%204.png)
-![Titanic Pic 5](path/to/titanic%20pic%205.png)
-![Titanic Pic 6](path/to/titanic%20pic%206.png)
+![Distribution of Age](https://example.com/images/age_distribution.png)
 
-## Analysis
+![Survival by Gender](https://example.com/images/survival_by_gender.png)
 
-In this section, we delve into the insights gathered from the dataset.
+![Survival by Class](https://example.com/images/survival_by_class.png)
+
+![Fare Distribution](https://example.com/images/fare_distribution.png)
+
+![Embarked Distribution](https://example.com/images/embarked_distribution.png)
+
+![Survival by Age](https://example.com/images/survival_by_age.png)
+
+## Conclusion
+The analysis provides insights into the factors that influenced survival on the Titanic. Further analysis could explore machine learning models to predict survival based on the available data.
+
+## Acknowledgements
+- [Kaggle Titanic Dataset](https://www.kaggle.com/c/titanic)
