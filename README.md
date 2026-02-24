@@ -1,38 +1,48 @@
 # Titanic Survival Prediction | End-to-End ML Analysis
 
-This repository explores the Titanic passenger dataset to understand factors affecting survival and builds a **Logistic Regression model** to predict passenger survival. The project follows a complete data science workflow including **data cleaning, feature engineering, EDA, and predictive modeling**.
-
-The final model achieves **~76% accuracy** using a small set of meaningful features.
-
----
-
-## Overview | Highlights
-
-Data Cleaning | Feature Engineering | Exploratory Data Analysis | Logistic Regression | Model Evaluation
-
-**Key Points:**
-
-- End-to-end machine learning workflow  
-- Analysis of survival patterns by gender, class, age, and family size  
-- Logistic Regression model achieving 76% accuracy  
-- Clear and reproducible workflow for any user
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Pandas](https://img.shields.io/badge/Pandas-1.3.0-green)
+![Scikit-learn](https://img.shields.io/badge/Scikit--learn-0.24.2-orange)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-3.4.2-blue)
+![Seaborn](https://img.shields.io/badge/Seaborn-0.11.1-teal)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MurtazaMajid/Titanic-Data-Analysis/blob/main/notebooks/titanic.ipynb)
 
 ---
 
-## Dataset | Source
+## Project Motivation
 
-**Source:** Kaggle Titanic Dataset  
+Predicting Titanic passenger survival is a classic ML problem, perfect for demonstrating:
+
+- Data cleaning and preprocessing  
+- Feature engineering  
+- Exploratory Data Analysis (EDA)  
+- Logistic Regression modeling  
+- Model evaluation  
+
+This repo provides a **complete end-to-end workflow**, from raw data to actionable insights.
+
+---
+
+## Problem Statement
+
+Given passenger information such as age, gender, passenger class, family size, fare, and embarkation point, predict if the passenger survived the Titanic disaster.
+
+---
+
+## Dataset
+
+**Source:** [Kaggle Titanic Dataset](https://www.kaggle.com/c/titanic/data)  
 **Total Passengers:** 891  
 
 | Feature         | Description                           |
 |-----------------|---------------------------------------|
-| PassengerId     | Unique passenger identifier           |
+| PassengerId     | Unique identifier                     |
 | Pclass          | Passenger class (1st, 2nd, 3rd)      |
-| Name            | Name of passenger                     |
+| Name            | Passenger name                        |
 | Sex             | Gender                                |
-| Age             | Age of passenger                      |
-| SibSp           | # of siblings/spouses aboard          |
-| Parch           | # of parents/children aboard          |
+| Age             | Passenger age                         |
+| SibSp           | Siblings/Spouses aboard               |
+| Parch           | Parents/Children aboard               |
 | Ticket          | Ticket number                         |
 | Fare            | Ticket fare                           |
 | Cabin           | Cabin number                           |
@@ -41,92 +51,114 @@ Data Cleaning | Feature Engineering | Exploratory Data Analysis | Logistic Regre
 
 ---
 
-## Project Workflow | Steps
+## Workflow
 
-Data Loading | Cleaning | Missing Values | Outlier Detection | Feature Engineering | EDA | Model Training | Model Evaluation
-
-1. Load the dataset  
+1. Load dataset  
 2. Remove irrelevant columns (`Name`, `Ticket`, `Cabin`)  
-3. Handle missing values (`Age` via linear interpolation)  
-4. Remove outliers in `Fare` using IQR method  
+3. Handle missing values (`Age`) via interpolation  
+4. Remove Fare outliers (IQR method)  
 5. Encode categorical variables (`Sex`)  
 6. Create new features (`Age Groups`, `Family Size`)  
-7. Perform EDA and visualize survival patterns  
-8. Train a Logistic Regression model using `Age`, `Pclass`, `Sex`  
-9. Evaluate model performance (accuracy, confusion matrix, classification report)  
+7. Exploratory Data Analysis & visualization  
+8. Train Logistic Regression model  
+9. Evaluate performance (accuracy, confusion matrix, classification report)  
 
 ---
 
-## Exploratory Data Analysis | Key Insights
+## Exploratory Data Analysis
 
-| Analysis                       | Finding                                         |
-|--------------------------------|------------------------------------------------|
-| Survival by Gender              | Female: 68.9%, Male: 17.9%                    |
-| Survival by Passenger Class     | 1st: 50.9%, 2nd: 48.6%, 3rd: 24.6%           |
-| Survival by Age Group           | Children highest, Teens lowest                 |
-| Survival by Family Size         | Families of 3 had highest survival (72.7%)    |
-| Embarkation Point               | C: 44.8%, Q: 38.7%, S: 31.2%                  |
+### Fare Distribution
+![Fare Distribution](images/titanic_pic_1.png)  
+- Outliers removed using IQR method.  
+- Helps normalize Fare and improve model performance.
 
-**Observation:** Gender and passenger class had the strongest impact on survival. Small families also fared better.
+### Survival by Gender
+![Gender Survival](images/titanic_pic_2.png)  
+- Females: 68.9% survival vs Males: 17.9%.  
+- Confirms “women and children first.”
+
+### Age Distribution
+![Age Distribution](images/titanic_pic_3.png)  
+- Children had highest survival rate, teens the lowest.  
+- Most passengers aged 20–40.
+
+### Survival by Passenger Class
+![Class Survival](images/titanic_pic_4.png)  
+- 1st and 2nd class passengers survived more than 3rd class.  
+- Social class was a major survival factor.
+
+### Feature Correlation
+![Feature Correlation](images/titanic_pic_5.png)  
+- `Pclass` negatively correlated with survival  
+- `Fare` positively correlated  
+- `Age` slightly negatively correlated  
+
+### Model Performance
+![Model Performance](images/titanic_pic_6.png)  
+- Logistic Regression accuracy: 76%  
+- Model captures key patterns using minimal features.
 
 ---
 
 ## Machine Learning Model | Logistic Regression
 
-**Features Used:** `Age`, `Pclass`, `Sex`
-
-### Train/Test Split
+**Features Used:** Age, Pclass, Sex  
 
 ```python
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-```
-
-### Feature Scaling
-
-```python
 from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-```
-
-### Model Training & Evaluation
-
-```python
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Scale features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Train model
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
+# Predict
 y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-conf_matrix = confusion_matrix(y_test, y_pred)
-class_report = classification_report(y_test, y_pred)
 
+# Evaluation
+accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.2f}")
-print(conf_matrix)
-print(class_report)
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
 ```
 
 **Performance Summary:**
 
-| Metric           | Score           |
-|------------------|----------------|
-| Accuracy         | 0.76           |
-| Precision (0)    | 0.80           |
-| Recall (0)       | 0.85           |
-| Precision (1)    | 0.68           |
-| Recall (1)       | 0.61           |
+| Metric       | Score |
+|-------------|-------|
+| Accuracy     | 0.76  |
+| Precision 0 | 0.80  |
+| Recall 0    | 0.85  |
+| Precision 1 | 0.68  |
+| Recall 1    | 0.61  |
 
 ---
 
 ## Example Prediction
 
-| Passenger Details       | Prediction        | Probability |
-|-------------------------|-----------------|-------------|
-| Age: 21, Male, 1st Class | Survived         | 58.5%      |
+| Age | Sex | Pclass | Prediction | Probability |
+|-----|-----|--------|-----------|------------|
+| 21  | Male| 1      | Survived  | 58.5%      |
+
+---
+
+## Key Insights
+
+- Women and children had the highest survival  
+- Higher class = higher survival  
+- Family size 3 had best survival  
+- Cherbourg embarkation passengers survived more often  
+- Age, gender, and class were the most predictive features  
 
 ---
 
@@ -134,58 +166,43 @@ print(class_report)
 
 ```
 Titanic-Data-Analysis
-│
-├── notebooks/
-│   └── titanic.ipynb         # Main analysis notebook
-├── data/
-│   └── titanic_cleaned.csv   # Cleaned dataset
-├── images/                   # Plots and visualizations
-├── requirements.txt          # Python dependencies
-└── README.md                 # Project documentation
+├── notebooks/           # Jupyter notebook
+├── data/                # Cleaned CSV
+├── images/              # Plots and visualizations
+├── requirements.txt     # Python dependencies
+└── README.md
 ```
 
 ---
 
-## Installation | Run Project
-
-Clone the repository:
+## Installation
 
 ```bash
 git clone https://github.com/MurtazaMajid/Titanic-Data-Analysis.git
 cd Titanic-Data-Analysis
-```
-
-Install dependencies:
-
-```bash
 pip install -r requirements.txt
-```
-
-Run the notebook:
-
-```bash
 jupyter notebook notebooks/titanic.ipynb
 ```
 
 ---
 
-## Skills Demonstrated
+## Skills & Tech Stack
 
-Python | Pandas | NumPy | Matplotlib | Seaborn | Scikit-learn | Data Cleaning | EDA | Feature Engineering | Logistic Regression | Model Evaluation
+Python | Pandas | NumPy | Matplotlib | Seaborn | Scikit-learn | EDA | Feature Engineering | Logistic Regression | Model Evaluation  
 
 ---
 
 ## Future Improvements
 
-- Include additional features such as passenger titles or cabin info  
-- Test advanced models like Random Forest, XGBoost, SVM  
-- Hyperparameter tuning with GridSearchCV  
-- Cross-validation for robust evaluation  
-- Deploy the model as a web application
+- Include features like passenger titles and cabin info  
+- Test advanced models: Random Forest, XGBoost, SVM  
+- Hyperparameter tuning and cross-validation  
+- Deploy as a web application (Flask or Streamlit)  
 
 ---
 
 ## Author
 
 **Murtaza Majid**  
-GitHub: [@MurtazaMajid](https://github.com/MurtazaMajid)
+GitHub: [@MurtazaMajid](https://github.com/MurtazaMajid)  
+LinkedIn: Murtaza Majid
